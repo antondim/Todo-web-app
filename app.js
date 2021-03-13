@@ -6,24 +6,35 @@ const completedList = document.querySelector(".completed-list");
 
 //Event Listeners
 todoButton.addEventListener("click", addToDo);
-todoList.addEventListener("click", deleteNCheck);
-completedList.addEventListener("click", deleteNCheck);
+todoList.addEventListener("click", buttonActions);
+completedList.addEventListener("click", buttonActions);
+todoList.addEventListener("mouseover", saveElementTimes);
+completedList.addEventListener("mouseover", saveElementTimes);
+
 
 //Functions
 
-// delete and check button event handler
-function deleteNCheck(event) {
+function saveElementTimes(event) {
     const eventTarget = event.target;
-    console.log(typeof(eventTarget));
-    console.log(eventTarget);
-    
-    if (eventTarget.classList[0] == 'trash-btn') {
-      eventTarget.parentElement.remove();
-    }else if (eventTarget.classList[0] == 'completed-btn'){
-        eventTarget.parentNode.className = "completed";
-        eventTarget.parentNode.children[0].className = "completed-item";
-        completedList.appendChild(eventTarget.parentNode);
-        eventTarget.parentNode.removeChild(eventTarget);
+    if (eventTarget.classList[0] === 'clock-btn') {
+        console.log(eventTarget.timeStamp);
+    }
+}
+
+function buttonActions(event) {
+    const eventTarget = event.target;
+    switch(eventTarget.classList[0]){
+        case 'trash-btn':
+            eventTarget.parentElement.remove();
+            break;
+        case 'completed-btn':
+            eventTarget.parentNode.className = "completed";
+            eventTarget.parentNode.children[0].className = "completed-item";
+            completedList.appendChild(eventTarget.parentNode);
+            eventTarget.parentNode.removeChild(eventTarget);
+            break;
+        case 'clock-btn':
+            break;
     }
 }
 
@@ -55,9 +66,11 @@ function addToDo(event) {
         todoDiv.appendChild(trashButton);
 
         //Create Time Created BUTTON
-        const timeIcon = document.createElement('img');
-        timeIcon.innerHTML = ''
-    
+        const clockButton = document.createElement('button');
+        clockButton.innerHTML = '<i class="far fa-clock"></i>';
+        clockButton.classList.add('clock-btn')
+        todoDiv.appendChild(clockButton);
+
         todoList.appendChild(todoDiv);
         //Clear the value of input in the end
         todoInput.value = "";    
