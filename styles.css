@@ -6,14 +6,22 @@
 }
 
 body {
-  background-image: linear-gradient(120deg, #f6d365, #fda085);
+  /* background-image: linear-gradient(120deg, #f6d365, #fda085); */
   font-family: "Poppins", sans-serif;
+}
+.top-section {
+  background: url("./todolist2.jpg");
+  background-position: center;
+  background-size: cover;
+  background-position-y: top;
 }
 
 header {
-  font-size: 1.5rem;
-  min-height: 100vh;
-  color: rgb(250, 244, 244);
+  font-size: 3rem;
+  min-height: 50vh;
+  color: rgb(255, 255, 255);
+  opacity: 80%;
+  text-shadow: 0px 2px black;
 }
 
 header,
@@ -22,7 +30,6 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
 }
 
 form input,
@@ -69,6 +76,7 @@ form button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 1px solid rgb(192, 191, 191);
 }
 
 .todo li,
@@ -99,18 +107,33 @@ form button:hover {
   background: #ff6f47;
 }
 .completed-btn {
-  background: rgb(96, 211, 96);
+  background: rgb(21, 151, 21);
 }
 .clock-btn {
-  background: rgb(169, 96, 211);
+  background: rgb(85, 59, 29);
+  position: relative;
 }
-/* .clock-icon {
-  color: white;
-  cursor: pointer;
-  background: #703288;
-  font-size: 1rem;
-  padding: 1rem;
-} */
+  /*Show text on clock-btn hover*/
+.time-text {
+  visibility: hidden;
+  width: 180px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  
+}
+.todo-list .clock-btn:hover .time-text, 
+.completed-list .clock-btn:hover .time-text {
+  visibility: visible;
+}
+
+.time-text {
+  top: 0px;
+  left: 110%;
+}
 
 .fa-trash,
 .fa-check,
@@ -118,23 +141,21 @@ form button:hover {
   pointer-events: none;
 }
 
-/* .ongoing-tasks,
-.completed-tasks {
-  border: 2px solid rgb(250, 244, 244);
-} */
 
 .todo-tasks h2,
 .completed-tasks h2 {
-  color: white;
+  color: rgb(192, 191, 191);
   text-align: center;
+  position-
 }
 
 .todo-tasks {
   align-items: center;
 }
+
 .tasks {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   justify-content: space-evenly;
+  margin-top: 3rem;
 }

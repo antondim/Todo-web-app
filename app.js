@@ -8,21 +8,12 @@ const completedList = document.querySelector(".completed-list");
 todoButton.addEventListener("click", addToDo);
 todoList.addEventListener("click", buttonActions);
 completedList.addEventListener("click", buttonActions);
-todoList.addEventListener("mouseover", saveElementTimes);
-completedList.addEventListener("mouseover", saveElementTimes);
-
 
 //Functions
-
-function saveElementTimes(event) {
-    const eventTarget = event.target;
-    if (eventTarget.classList[0] === 'clock-btn') {
-        console.log(eventTarget.timeStamp);
-    }
-}
-
+//delete and check buttons handler
 function buttonActions(event) {
     const eventTarget = event.target;
+    
     switch(eventTarget.classList[0]){
         case 'trash-btn':
             eventTarget.parentElement.remove();
@@ -30,10 +21,14 @@ function buttonActions(event) {
         case 'completed-btn':
             eventTarget.parentNode.className = "completed";
             eventTarget.parentNode.children[0].className = "completed-item";
+            
+            var today = new Date();
+            var date = today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            eventTarget.parentNode.children[3].children[1].innerText = 'Date added: ' + date + 
+                                                                       '\nTime added: ' + time;
             completedList.appendChild(eventTarget.parentNode);
             eventTarget.parentNode.removeChild(eventTarget);
-            break;
-        case 'clock-btn':
             break;
     }
 }
@@ -69,9 +64,19 @@ function addToDo(event) {
         const clockButton = document.createElement('button');
         clockButton.innerHTML = '<i class="far fa-clock"></i>';
         clockButton.classList.add('clock-btn')
+        
+        //Adding info about the time a task is created
+        var today = new Date();
+        var date = today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var timeCreatedInfo = document.createElement('span');
+        timeCreatedInfo.innerText = 'Date added: ' + date + '\nTime added: ' + time;
+        timeCreatedInfo.classList.add('time-text');
+        
+        clockButton.appendChild(timeCreatedInfo);
         todoDiv.appendChild(clockButton);
-
         todoList.appendChild(todoDiv);
+       
         //Clear the value of input in the end
         todoInput.value = "";    
     }
