@@ -10,6 +10,15 @@ todoList.addEventListener("click", buttonActions);
 completedList.addEventListener("click", buttonActions);
 
 //Functions
+
+const getDateNTime = () => {
+    var today = new Date();
+    var date = today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    return {date:date,time:time};
+}
+
+
 //delete and check buttons handler
 function buttonActions(event) {
     const eventTarget = event.target;
@@ -20,13 +29,9 @@ function buttonActions(event) {
             break;
         case 'completed-btn':
             eventTarget.parentNode.className = "completed";
-            eventTarget.parentNode.children[0].className = "completed-item";
-            
-            var today = new Date();
-            var date = today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear();
-            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            eventTarget.parentNode.children[3].children[1].innerText = 'Date added: ' + date + 
-                                                                       '\nTime added: ' + time;
+            eventTarget.parentNode.children[0].className = "completed-item";        
+            eventTarget.parentNode.children[3].children[1].innerText = 'Date added: ' + getDateNTime().date + 
+                                                                       '\nTime added: ' + getDateNTime().time;
             completedList.appendChild(eventTarget.parentNode);
             eventTarget.parentNode.removeChild(eventTarget);
             break;
@@ -66,11 +71,9 @@ function addToDo(event) {
         clockButton.classList.add('clock-btn')
         
         //Adding info about the time a task is created
-        var today = new Date();
-        var date = today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear();
-        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         var timeCreatedInfo = document.createElement('span');
-        timeCreatedInfo.innerText = 'Date added: ' + date + '\nTime added: ' + time;
+        timeCreatedInfo.innerText = 'Date added: ' + getDateNTime().date + 
+                                    '\nTime added: ' + getDateNTime().time;
         timeCreatedInfo.classList.add('time-text');
         
         clockButton.appendChild(timeCreatedInfo);
